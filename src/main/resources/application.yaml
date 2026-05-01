@@ -66,10 +66,17 @@ server:
   servlet:
     context-path: ${SERVER_CONTEXT_PATH:/api}
 
+jwt:
+  secret: ${JWT_SECRET:djdesk-super-secret-key-must-be-at-least-32-characters-long!!}
+  expiration: ${JWT_EXPIRATION_MS:900000}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION_MS:604800000}
+
 logging:
   level:
     root: ${LOG_LEVEL:INFO}
     br.com.djdesk: ${LOG_LEVEL_APP:DEBUG}
     org.springframework.security: ${LOG_LEVEL_SECURITY:INFO}
+    # Suppress intentional warning: our DaoAuthenticationProvider is configured manually (by design)
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
     org.hibernate.SQL: ${LOG_LEVEL_SQL:OFF}
     org.hibernate.orm.jdbc.bind: ${LOG_LEVEL_SQL_BIND:OFF}
