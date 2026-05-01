@@ -5,6 +5,7 @@ import br.com.djdesk.service.domain.port.out.UserRepositoryPort;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class UserPersistenceAdapter implements UserRepositoryPort {
@@ -28,5 +29,10 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
     @Override
     public Optional<User> findByEmail(String email) {
         return userJpaRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findBySlug(UUID slug) {
+        return userJpaRepository.findBySlug(slug);
     }
 }

@@ -19,6 +19,24 @@ public class GlobalExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     private static final String CORRELATION_ID_MDC_KEY = "correlationId";
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiError> handleResourceNotFound(
+            ResourceNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        log.warn("Resource not found [code={}, correlationId={}]",
+                ex.getErrorCode().getCode(), MDC.get(CORRELATION_ID_MDC_KEY));
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiError.of(
+                        MDC.get(CORRELATION_ID_MDC_KEY),
+                        HttpStatus.NOT_FOUND.value(),
+                        ex.getErrorCode(),
+                        ex.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
     @ExceptionHandler(EmailAlreadyRegisteredException.class)
     public ResponseEntity<ApiError> handleEmailAlreadyRegistered(
             EmailAlreadyRegisteredException ex,

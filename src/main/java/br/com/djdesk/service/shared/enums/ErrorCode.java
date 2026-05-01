@@ -4,11 +4,15 @@ public enum ErrorCode {
 
     // User errors — ERR-USR-xxx
     USER_EMAIL_ALREADY_REGISTERED("ERR-USR-001", "error.user.email.already.registered"),
+    USER_NOT_FOUND("ERR-USR-002", "error.user.not.found"),
 
     // Auth errors — ERR-AUTH-xxx
     INVALID_CREDENTIALS("ERR-AUTH-001", "error.auth.invalid.credentials"),
     REFRESH_TOKEN_INVALID("ERR-AUTH-002", "error.auth.refresh.token.invalid"),
-    REFRESH_TOKEN_EXPIRED("ERR-AUTH-003", "error.auth.refresh.token.expired");
+    REFRESH_TOKEN_EXPIRED("ERR-AUTH-003", "error.auth.refresh.token.expired"),
+
+    // Event errors — ERR-EVT-xxx
+    EVENT_NOT_FOUND("ERR-EVT-001", "error.event.not.found");
 
     private final String code;
     private final String messageKey;
