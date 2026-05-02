@@ -12,7 +12,11 @@ public enum ErrorCode {
     REFRESH_TOKEN_EXPIRED("ERR-AUTH-003", "error.auth.refresh.token.expired"),
 
     // Event errors — ERR-EVT-xxx
-    EVENT_NOT_FOUND("ERR-EVT-001", "error.event.not.found");
+    EVENT_NOT_FOUND("ERR-EVT-001", "error.event.not.found"),
+
+    // Briefing errors — ERR-BRF-xxx
+    BRIEFING_SESSION_NOT_FOUND("ERR-BRF-001", "error.briefing.session.not.found"),
+    AGENT_CONFIG_NOT_FOUND("ERR-BRF-002", "error.briefing.agent.config.not.found");
 
     private final String code;
     private final String messageKey;

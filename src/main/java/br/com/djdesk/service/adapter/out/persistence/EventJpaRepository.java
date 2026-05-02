@@ -15,4 +15,6 @@ public interface EventJpaRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByDjSlug(@Param("djSlug") UUID djSlug);
 
     Optional<Event> findBySlug(UUID slug);
+
+    Optional<Event> findByPublicLink(UUID publicLink);
 }

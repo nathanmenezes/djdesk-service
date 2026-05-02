@@ -71,6 +71,13 @@ jwt:
   expiration: ${JWT_EXPIRATION_MS:900000}
   refresh-expiration: ${JWT_REFRESH_EXPIRATION_MS:604800000}
 
+ai:
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_MODEL:gpt-4o-mini}
+    max-tokens: ${OPENAI_MAX_TOKENS:1500}
+    temperature: ${OPENAI_TEMPERATURE:0.7}
+
 logging:
   level:
     root: ${LOG_LEVEL:INFO}

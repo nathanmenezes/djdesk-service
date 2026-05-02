@@ -13,4 +13,6 @@ public interface EventRepositoryPort {
     List<Event> findAllByDjSlug(UUID djSlug);
 
     Optional<Event> findBySlug(UUID slug);
+
+    Optional<Event> findByPublicLink(UUID publicLink);
 }

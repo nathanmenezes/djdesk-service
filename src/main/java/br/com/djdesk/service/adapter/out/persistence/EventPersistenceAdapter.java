@@ -31,4 +31,9 @@ public class EventPersistenceAdapter implements EventRepositoryPort {
     public Optional<Event> findBySlug(UUID slug) {
         return eventJpaRepository.findBySlug(slug);
     }
+
+    @Override
+    public Optional<Event> findByPublicLink(UUID publicLink) {
+        return eventJpaRepository.findByPublicLink(publicLink);
+    }
 }

@@ -45,6 +45,8 @@ public class SecurityConfig {
                                 "/v1/auth/login",
                                 "/v1/auth/refresh"
                         ).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/public/**").permitAll()
+                        .requestMatchers("/ws/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
