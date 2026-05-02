@@ -19,4 +19,6 @@ public interface BriefingRepositoryPort {
     List<BriefingMessage> findMessagesBySessionSlug(UUID sessionSlug);
 
     BriefingResult saveResult(BriefingResult result);
+
+    Optional<BriefingResult> findResultByEventSlug(UUID eventSlug);
 }

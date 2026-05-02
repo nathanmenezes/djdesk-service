@@ -1,10 +1,12 @@
 package br.com.djdesk.service.adapter.in.web;
 
+import br.com.djdesk.service.adapter.in.web.dto.BriefingResultResponse;
 import br.com.djdesk.service.adapter.in.web.dto.CreateEventRequest;
 import br.com.djdesk.service.adapter.in.web.dto.EventResponse;
 import br.com.djdesk.service.domain.model.Event;
 import br.com.djdesk.service.domain.port.in.CreateEventUseCase;
 import br.com.djdesk.service.domain.port.in.FindEventUseCase;
+import br.com.djdesk.service.domain.port.in.GetBriefingResultUseCase;
 import br.com.djdesk.service.domain.port.in.ListEventsUseCase;
 import br.com.djdesk.service.infrastructure.security.UserPrincipal;
 import br.com.djdesk.service.shared.enums.ErrorCode;
@@ -30,15 +32,18 @@ public class EventController {
     private final CreateEventUseCase createEventUseCase;
     private final ListEventsUseCase listEventsUseCase;
     private final FindEventUseCase findEventUseCase;
+    private final GetBriefingResultUseCase getBriefingResultUseCase;
 
     public EventController(
             CreateEventUseCase createEventUseCase,
             ListEventsUseCase listEventsUseCase,
-            FindEventUseCase findEventUseCase
+            FindEventUseCase findEventUseCase,
+            GetBriefingResultUseCase getBriefingResultUseCase
     ) {
         this.createEventUseCase = createEventUseCase;
         this.listEventsUseCase = listEventsUseCase;
         this.findEventUseCase = findEventUseCase;
+        this.getBriefingResultUseCase = getBriefingResultUseCase;
     }
 
     @PostMapping
@@ -66,5 +71,12 @@ public class EventController {
         Event event = findEventUseCase.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException(ErrorCode.EVENT_NOT_FOUND, "Event not found"));
         return ResponseEntity.ok(EventResponse.from(event));
+    }
+
+    @GetMapping("/{slug}/briefing-result")
+    public ResponseEntity<BriefingResultResponse> getBriefingResult(@PathVariable UUID slug) {
+        return getBriefingResultUseCase.getByEventSlug(slug)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.noContent().build());
     }
 }

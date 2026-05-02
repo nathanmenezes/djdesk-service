@@ -51,4 +51,9 @@ public class BriefingPersistenceAdapter implements BriefingRepositoryPort {
     public BriefingResult saveResult(BriefingResult result) {
         return resultRepository.save(result);
     }
+
+    @Override
+    public Optional<BriefingResult> findResultByEventSlug(UUID eventSlug) {
+        return resultRepository.findByEventSlug(eventSlug);
+    }
 }
